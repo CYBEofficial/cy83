@@ -13,13 +13,13 @@ const getAssetUrl = (path: string) => {
 };
 
 // For static export, we need to ensure the manifest is in the root
-const manifestPath = isProd ? `${basePath}/manifest.webmanifest` : '/manifest.webmanifest';
+const manifestPath = '/manifest.webmanifest';
 
 export const metadata: Metadata = {
   title: 'StrogoPovjerljivo',
   description: 'Video player application',
   metadataBase: new URL(isProd ? 'https://cybe.in' : 'http://localhost:3000'),
-  manifest: manifestPath,
+  manifest: isProd ? `${basePath}${manifestPath}` : manifestPath,
   icons: {
     icon: `${basePath}/favicon.ico`,
     shortcut: `${basePath}/favicon.ico`,
@@ -43,7 +43,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <link rel="manifest" href={manifestPath} />
+        <link rel="manifest" href={isProd ? `${basePath}${manifestPath}` : manifestPath} />
         <link rel="shortcut icon" href={`${basePath}/favicon.ico`} />
         <link rel="icon" type="image/x-icon" href={`${basePath}/favicon.ico`} />
         <link rel="icon" type="image/svg+xml" href={`${basePath}/media/cybe-logo.svg`} />

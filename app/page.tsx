@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-black">
       <VideoPlayer 
-        videoUrl={`${basePath}/media/whatgoesundercomesunder.mp4`}
+        videoUrl="/media/whatgoesundercomesunder.mp4"
       />
     </main>
   );
