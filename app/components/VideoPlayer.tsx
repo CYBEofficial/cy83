@@ -9,7 +9,6 @@ interface VideoPlayerProps {
 
 export default function VideoPlayer({ videoUrl }: VideoPlayerProps) {
   const [isMuted, setIsMuted] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
   const playerContainerRef = useRef<HTMLDivElement>(null);
 
@@ -29,10 +28,7 @@ export default function VideoPlayer({ videoUrl }: VideoPlayerProps) {
     setIsMuted(prev => !prev);
   };
 
-  // Play/pause handlers
-  const handlePlayPause = () => {
-    setIsPlaying((prev) => !prev);
-  };
+
 
   // Add click event listener to the container (for unmute)
   useEffect(() => {
@@ -58,7 +54,7 @@ export default function VideoPlayer({ videoUrl }: VideoPlayerProps) {
       <div className="w-full h-full overflow-hidden rounded-none relative" ref={playerContainerRef}>
         <ReactPlayer
           url={fullVideoUrl}
-          playing={isPlaying}
+          playing={true}
           loop
           muted={isMuted}
           width="100%"
@@ -76,22 +72,9 @@ export default function VideoPlayer({ videoUrl }: VideoPlayerProps) {
               }
             }
           }}
-          onPause={() => setIsPlaying(false)}
-          onPlay={() => setIsPlaying(true)}
+
         />
-        {/* Play button overlay (only when paused) */}
-        {!isPlaying && (
-          <button
-            className="absolute inset-0 flex items-center justify-center z-20 bg-black/40"
-            onClick={handlePlayPause}
-            aria-label="Play video"
-          >
-            <svg className="w-20 h-20 text-white drop-shadow-lg" fill="currentColor" viewBox="0 0 64 64">
-              <circle cx="32" cy="32" r="32" fill="#000" fillOpacity="0.5" />
-              <polygon points="26,18 50,32 26,46" fill="#fff" />
-            </svg>
-          </button>
-        )}
+
         {/* Click overlay - only un-mutes */}
         <button 
           className="absolute inset-0 cursor-pointer z-10 bg-transparent border-0"
