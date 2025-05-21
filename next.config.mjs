@@ -22,7 +22,7 @@ const nextConfig = {
   // For GitHub Pages
   basePath: basePath,
   // Use root-relative paths for assets
-  assetPrefix: isProd ? 'https://cybe.in' : undefined,
+  assetPrefix: isProd ? 'https://cybe.in/cyb3' : '',
   // Add trailing slash for better compatibility
   trailingSlash: true,
   // Skip linting during build (can be re-enabled if needed)
@@ -49,10 +49,10 @@ const nextConfig = {
             {
               from: 'public',
               to: join(__dirname, 'out'),
+              noErrorOnMissing: true,
               globOptions: {
                 ignore: ['**/.DS_Store', '**/public/**'],
-              },
-              noErrorOnMissing: true,
+              }
             },
           ],
         })

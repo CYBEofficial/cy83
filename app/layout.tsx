@@ -13,13 +13,13 @@ const getAssetUrl = (path: string) => {
 };
 
 // For static export, we need to ensure the manifest is in the root
-const manifestPath = '/manifest.webmanifest';
+const manifestPath = 'manifest.webmanifest';
 
 export const metadata: Metadata = {
   title: 'StrogoPovjerljivo',
   description: 'Video player application',
   metadataBase: new URL(isProd ? 'https://cybe.in' : 'http://localhost:3000'),
-  manifest: isProd ? `${basePath}${manifestPath}` : manifestPath,
+  manifest: isProd ? `/cyb3/${manifestPath}` : `/${manifestPath}`,
   icons: {
     icon: `${basePath}/favicon.ico`,
     shortcut: `${basePath}/favicon.ico`,

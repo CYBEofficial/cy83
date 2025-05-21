@@ -14,15 +14,19 @@ export default function VideoPlayer({ videoUrl }: VideoPlayerProps) {
   
   // Get the full video URL based on the environment
   const getVideoUrl = (path: string) => {
+    // If it's already a full URL, return as is
     if (path.startsWith('http')) return path;
-    // Remove any leading basePath to prevent duplication
-    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
-    const cleanPath = path.startsWith(basePath) ? path.replace(basePath, '') : path;
+    
+    // Remove any leading slashes to prevent double slashes
+    const cleanPath = path.replace(/^\/+/, '');
     
     if (process.env.NODE_ENV === 'production') {
-      return `https://cybe.in${basePath}${cleanPath}`;
+      // In production, use the full URL with base path
+      return `https://cybe.in/cyb3/${cleanPath}`;
     }
-    return cleanPath;
+    
+    // In development, use the path as is (Next.js will handle it)
+    return `/${cleanPath}`;
   };
   
   const fullVideoUrl = getVideoUrl(videoUrl);
