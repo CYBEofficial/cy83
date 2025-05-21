@@ -1,11 +1,15 @@
 // @ts-check
 
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import CopyPlugin from 'copy-webpack-plugin';
+
 const isProd = process.env.NODE_ENV === 'production';
 const basePath = isProd ? '/cyb3' : '';
 
-// This is needed to ensure static files are copied to the correct location
-const copyStaticFiles = require('copy-webpack-plugin');
-const path = require('path');
+// Get the current module's directory
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -40,11 +44,11 @@ const nextConfig = {
     // Copy files from public to out directory
     if (!isServer) {
       config.plugins.push(
-        new copyStaticFiles({
+        new CopyPlugin({
           patterns: [
             {
               from: 'public',
-              to: path.join(__dirname, 'out'),
+              to: join(__dirname, 'out'),
               globOptions: {
                 ignore: ['**/.DS_Store', '**/public/**'],
               },
