@@ -7,8 +7,8 @@ import { useState } from 'react';
 export default function Home() {
   const [isMuted, setIsMuted] = useState(true);
   return (
-    <main className="relative min-h-screen bg-black overflow-hidden">
-      <div className="fixed inset-0 w-screen h-screen z-0">
+    <main className="fixed inset-0 w-screen h-screen bg-black overflow-hidden touch-none">
+      <div className="absolute inset-0 w-full h-full z-0">
         <VideoPlayer 
           videoUrl="/media/whatgoesundercomesunder.mp4"
           isMuted={isMuted}
@@ -18,7 +18,7 @@ export default function Home() {
 
       {/* Overlay Buttons */}
       {/* Demo Button - Bottom Left (restored style) */}
-      <div className="absolute bottom-4 left-4 z-[1000] p-2 bg-transparent">
+      <div className="fixed bottom-4 left-4 z-[1000] p-2 bg-transparent sm:bottom-6 sm:left-6">
         <div className="relative">
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLScdXnUVqmYUBVQqRuapSiq27pfNWWXy89F1P2rRPPaoiFyfxQ/viewform?usp=sharing"
@@ -35,7 +35,7 @@ export default function Home() {
         </div>
       </div>
       {/* Mute/Unmute Button - Bottom Right (restored style) */}
-      <div className="absolute bottom-4 right-4 z-[1000] p-2 bg-transparent">
+      <div className="fixed bottom-4 right-4 z-[1000] p-2 bg-transparent sm:bottom-6 sm:right-6">
         <div className="relative">
           <button
             onClick={() => setIsMuted((prev) => !prev)}
