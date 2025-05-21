@@ -13,8 +13,8 @@ const nextConfig = {
   },
   // For GitHub Pages
   basePath: basePath,
-  // Use absolute paths for assets - important for static assets
-  assetPrefix: isProd ? 'https://cybe.in/cyb3' : '',
+  // Use basePath for assetPrefix (static export best practice)
+  assetPrefix: basePath,
   // Add trailing slash for better compatibility
   trailingSlash: true,
   // Skip linting during build
@@ -39,11 +39,6 @@ const nextConfig = {
         ...config.resolve.fallback,
         fs: false,
       };
-      
-      // Fix static asset paths for production
-      if (isProd) {
-        config.output.publicPath = 'https://cybe.in/cyb3/_next/';
-      }
     }
     return config;
   },
