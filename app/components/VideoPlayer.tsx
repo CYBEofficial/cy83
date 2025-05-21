@@ -51,7 +51,7 @@ export default function VideoPlayer({ videoUrl, isMuted, setIsMuted }: VideoPlay
   }
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-screen">
       <div className="w-full h-full overflow-hidden rounded-none relative" ref={playerContainerRef}>
         <ReactPlayer
           url={fullVideoUrl}
