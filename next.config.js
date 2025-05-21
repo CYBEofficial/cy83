@@ -11,9 +11,16 @@ const nextConfig = {
     loader: 'custom',
     loaderFile: './image-loader.js',
   },
-  // Add basePath if deploying to GitHub Pages with project name in URL
-  // basePath: isProd ? '/cy83' : '',
-  // assetPrefix: isProd ? '/cy83/' : '',
+  // For custom domain, we don't need basePath or assetPrefix
+  // as we want to serve from the root of the domain
+  basePath: '',
+  assetPrefix: '',
+  // Optional: Add trailing slash for better compatibility
+  trailingSlash: true,
+  // Optional: Add environment variables for the domain
+  env: {
+    NEXT_PUBLIC_BASE_URL: 'https://cybe.in',
+  },
 };
 
 module.exports = nextConfig;
