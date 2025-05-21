@@ -50,7 +50,7 @@ export default function VideoPlayer({ videoUrl }: VideoPlayerProps) {
   return (
     <div className="relative w-full h-full">
       {/* Video container with click handler */}
-      <div className="w-full h-full overflow-hidden rounded-lg relative" ref={playerContainerRef}>
+      <div className="w-full h-full overflow-hidden rounded-none relative" ref={playerContainerRef}>
         <ReactPlayer
           url={fullVideoUrl}
           playing
@@ -60,7 +60,6 @@ export default function VideoPlayer({ videoUrl }: VideoPlayerProps) {
           height="100%"
           style={{
             objectFit: 'cover',
-            transform: 'scale(1.05)',
             width: '100%',
             height: '100%',
             position: 'relative',
@@ -73,7 +72,6 @@ export default function VideoPlayer({ videoUrl }: VideoPlayerProps) {
             }
           }}
         />
-        
         {/* Click overlay - only un-mutes */}
         <button 
           className="absolute inset-0 cursor-pointer z-10 bg-transparent border-0"

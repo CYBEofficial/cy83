@@ -42,13 +42,14 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="manifest" href={manifestPath} />
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/svg+xml" href="/media/cybe-logo.svg" />
         <link rel="apple-touch-icon" href="/media/cybe-logo.svg" />
       </head>
-      <body>{children}</body>
+      <body className="bg-black text-white min-h-screen font-sans antialiased text-base md:text-lg">{children}</body>
     </html>
   )
 }
