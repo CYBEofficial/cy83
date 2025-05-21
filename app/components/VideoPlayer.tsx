@@ -69,7 +69,11 @@ export default function VideoPlayer({ videoUrl, isMuted, setIsMuted }: VideoPlay
           config={{
             file: {
               attributes: {
-                crossOrigin: 'anonymous'
+                crossOrigin: 'anonymous',
+                playsInline: true,
+                webkitplaysinline: true,
+                muted: isMuted,
+                autoPlay: true,
               }
             }
           }}
