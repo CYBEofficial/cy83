@@ -13,8 +13,8 @@ const nextConfig = {
   },
   // For GitHub Pages
   basePath: basePath,
-  // Use root-relative paths for assets
-  assetPrefix: isProd ? 'https://cybe.in/cyb3' : undefined,
+  // Use relative paths for assets
+  assetPrefix: isProd ? './' : undefined,
   // Add trailing slash for better compatibility
   trailingSlash: true,
   // Skip linting during build
@@ -31,6 +31,17 @@ const nextConfig = {
   },
   // Disable the static export directory check
   skipTrailingSlashRedirect: true,
+  // Configure webpack for static export
+  webpack: (config, { isServer }) => {
+    // Fixes npm packages that depend on `fs` module
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+      };
+    }
+    return config;
+  },
 };
 
 export default nextConfig;

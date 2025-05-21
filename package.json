@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "postbuild": "cp -f public/manifest.webmanifest out/manifest.webmanifest || true",
+    "postbuild": "cp -r public/. out/ 2>/dev/null || :",
     "start": "next start",
     "lint": "next lint",
     "predeploy": "npm run build",
