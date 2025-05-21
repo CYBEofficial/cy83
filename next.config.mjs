@@ -13,8 +13,8 @@ const nextConfig = {
   },
   // For GitHub Pages
   basePath: basePath,
-  // Use relative paths for assets
-  assetPrefix: isProd ? './' : undefined,
+  // Use absolute paths for assets
+  assetPrefix: isProd ? basePath : undefined,
   // Add trailing slash for better compatibility
   trailingSlash: true,
   // Skip linting during build

@@ -20,13 +20,11 @@ export default function VideoPlayer({ videoUrl }: VideoPlayerProps) {
     // Remove any leading slashes to prevent double slashes
     const cleanPath = path.replace(/^\/+/, '');
     
-    if (process.env.NODE_ENV === 'production') {
-      // In production, use the full URL with base path
-      return `https://cybe.in/cyb3/${cleanPath}`;
-    }
+    // Use the basePath from Next.js config
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
     
     // In development, use the path as is (Next.js will handle it)
-    return `/${cleanPath}`;
+    return `${basePath}/${cleanPath}`;
   };
   
   const fullVideoUrl = getVideoUrl(videoUrl);
@@ -89,12 +87,9 @@ export default function VideoPlayer({ videoUrl }: VideoPlayerProps) {
         />
         
         {/* Click overlay - only un-mutes */}
-        <div 
-          className="absolute inset-0 cursor-pointer z-10"
+        <button 
+          className="absolute inset-0 cursor-pointer z-10 bg-transparent border-0"
           onClick={handleVideoClick}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => e.key === 'Enter' && handleVideoClick()}
           aria-label="Unmute video"
         />
       </div>

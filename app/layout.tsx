@@ -13,7 +13,7 @@ const getAssetUrl = (path: string) => {
 };
 
 // For static export, we need to ensure the manifest is in the root
-const manifestPath = './manifest.webmanifest';
+const manifestPath = 'manifest.webmanifest';
 
 export const metadata: Metadata = {
   title: 'StrogoPovjerljivo',
