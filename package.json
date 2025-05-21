@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "predeploy": "npm run build",
-    "deploy": "touch docs/.nojekyll && gh-pages -d docs"
+    "deploy": "touch docs/.nojekyll && echo 'cybe.in' > docs/CNAME && gh-pages -d docs -t"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
