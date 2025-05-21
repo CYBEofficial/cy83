@@ -12,20 +12,8 @@ export default function VideoPlayer({ videoUrl }: VideoPlayerProps) {
   const [isMounted, setIsMounted] = useState(false);
   const playerContainerRef = useRef<HTMLDivElement>(null);
   
-  // Get the full video URL based on the environment
-  const getVideoUrl = (path: string) => {
-    // If it's already a full URL, return as is
-    if (path.startsWith('http')) return path;
-    
-    // Remove any leading slashes to prevent double slashes
-    const cleanPath = path.replace(/^\/+/, '');
-    
-    // Use the basePath from Next.js config
-    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
-    
-    // In development, use the path as is (Next.js will handle it)
-    return `${basePath}/${cleanPath}`;
-  };
+  // Simply return the path as-is for root deployment
+  const getVideoUrl = (path: string) => path;
   
   const fullVideoUrl = getVideoUrl(videoUrl);
 
