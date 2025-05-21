@@ -5,11 +5,11 @@
   "homepage": "https://cybe.in",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && next export -o out",
     "start": "next start",
     "lint": "next lint",
     "predeploy": "npm run build",
-    "deploy": "touch docs/.nojekyll && echo 'cybe.in' > docs/CNAME && gh-pages -d docs -t"
+    "deploy": "gh-pages -d out -t"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",

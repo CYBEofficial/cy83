@@ -2,20 +2,24 @@ import './globals.css';
 import React from 'react';
 import { Metadata } from 'next';
 
+const isProd = process.env.NODE_ENV === 'production';
+const basePath = isProd ? '/cyb3' : '';
+
 export const metadata: Metadata = {
   title: 'StrogoPovjerljivo',
   description: 'Video player application',
-  manifest: '/site.webmanifest',
+  metadataBase: new URL(isProd ? 'https://jmefdev.github.io' : 'http://localhost:3000'),
+  manifest: `${basePath}/site.webmanifest`,
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/media/cybe-logo.svg',
+    icon: `${basePath}/favicon.ico`,
+    shortcut: `${basePath}/favicon.ico`,
+    apple: `${basePath}/media/cybe-logo.svg`,
   },
   themeColor: '#000000',
   openGraph: {
     title: 'StrogoPovjerljivo',
     description: 'Video player application',
-    url: 'https://cybe.in',
+    url: isProd ? 'https://jmefdev.github.io/cyb3' : 'http://localhost:3000',
     siteName: 'StrogoPovjerljivo',
     locale: 'en_US',
     type: 'website',
@@ -30,11 +34,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <link rel="manifest" href="/site.webmanifest" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        <link rel="icon" type="image/svg+xml" href="/media/cybe-logo.svg" />
-        <link rel="apple-touch-icon" href="/media/cybe-logo.svg" />
+        <link rel="manifest" href={`${basePath}/site.webmanifest`} />
+        <link rel="shortcut icon" href={`${basePath}/favicon.ico`} />
+        <link rel="icon" type="image/x-icon" href={`${basePath}/favicon.ico`} />
+        <link rel="icon" type="image/svg+xml" href={`${basePath}/media/cybe-logo.svg`} />
+        <link rel="apple-touch-icon" href={`${basePath}/media/cybe-logo.svg`} />
         <meta name="theme-color" content="#000000" />
       </head>
       <body>{children}</body>
