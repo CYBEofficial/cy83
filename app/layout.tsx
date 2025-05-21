@@ -3,7 +3,6 @@ import React from 'react';
 import { Metadata } from 'next';
 
 const isProd = process.env.NODE_ENV === 'production';
-const basePath = isProd ? '/cyb3' : '';
 
 // Use absolute URLs for production
 const getAssetUrl = (path: string) => {
@@ -16,20 +15,20 @@ const getAssetUrl = (path: string) => {
 const manifestPath = '/manifest.webmanifest';
 
 export const metadata: Metadata = {
-  title: 'StrogoPovjerljivo',
-  description: 'Video player application',
+  title: 'CYBE',
+  description: 'THE DEFIANCE STARTS NOW',
   metadataBase: new URL(isProd ? 'https://cybe.in' : 'http://localhost:3000'),
-  manifest: isProd ? `${basePath}${manifestPath}` : manifestPath,
+  manifest: manifestPath,
   icons: {
-    icon: `${basePath}/favicon.ico`,
-    shortcut: `${basePath}/favicon.ico`,
-    apple: `${basePath}/media/cybe-logo.svg`,
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/media/cybe-logo.svg',
   },
   openGraph: {
-    title: 'StrogoPovjerljivo',
-    description: 'Video player application',
+    title: 'CYBE',
+    description: 'THE DEFIANCE STARTS NOW',
     url: isProd ? 'https://cybe.in' : 'http://localhost:3000',
-    siteName: 'StrogoPovjerljivo',
+    siteName: 'CYBE',
     locale: 'en_US',
     type: 'website',
   },
@@ -43,11 +42,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <link rel="manifest" href={isProd ? `${basePath}${manifestPath}` : manifestPath} />
-        <link rel="shortcut icon" href={`${basePath}/favicon.ico`} />
-        <link rel="icon" type="image/x-icon" href={`${basePath}/favicon.ico`} />
-        <link rel="icon" type="image/svg+xml" href={`${basePath}/media/cybe-logo.svg`} />
-        <link rel="apple-touch-icon" href={`${basePath}/media/cybe-logo.svg`} />
+        <link rel="manifest" href={manifestPath} />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/svg+xml" href="/media/cybe-logo.svg" />
+        <link rel="apple-touch-icon" href="/media/cybe-logo.svg" />
       </head>
       <body>{children}</body>
     </html>

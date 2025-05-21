@@ -1,7 +1,6 @@
 // @ts-check
 
 const isProd = process.env.NODE_ENV === 'production';
-const basePath = isProd ? '/cyb3' : '';
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -12,9 +11,9 @@ const nextConfig = {
     unoptimized: true,
   },
   // For GitHub Pages
-  basePath: basePath,
+
   // Use basePath for assetPrefix (static export best practice)
-  assetPrefix: basePath,
+
   // Add trailing slash for better compatibility
   trailingSlash: true,
   // Skip linting during build
@@ -27,7 +26,7 @@ const nextConfig = {
   },
   // Environment variables
   env: {
-    NEXT_PUBLIC_BASE_PATH: basePath,
+    NEXT_PUBLIC_BASE_PATH: '',
   },
   // Disable the static export directory check
   skipTrailingSlashRedirect: true,
