@@ -11,6 +11,19 @@ export default function VideoPlayer({ videoUrl }: VideoPlayerProps) {
   const [isMuted, setIsMuted] = useState(true);
   const [isMounted, setIsMounted] = useState(false);
   const playerContainerRef = useRef<HTMLDivElement>(null);
+  
+  // Get the full video URL based on the environment
+  const getVideoUrl = (path: string) => {
+    if (path.startsWith('http')) return path;
+    // In production, use the full URL with the base path
+    if (process.env.NODE_ENV === 'production') {
+      const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+      return `https://cybe.in${basePath}${path}`;
+    }
+    return path;
+  };
+  
+  const fullVideoUrl = getVideoUrl(videoUrl);
 
   // Unmute when clicking on the video
   const handleVideoClick = () => {
@@ -47,7 +60,7 @@ export default function VideoPlayer({ videoUrl }: VideoPlayerProps) {
       {/* Video container with click handler */}
       <div className="w-full h-full overflow-hidden rounded-lg relative" ref={playerContainerRef}>
         <ReactPlayer
-          url={videoUrl}
+          url={fullVideoUrl}
           playing
           loop
           muted={isMuted}
@@ -59,6 +72,13 @@ export default function VideoPlayer({ videoUrl }: VideoPlayerProps) {
             width: '100%',
             height: '100%',
             position: 'relative',
+          }}
+          config={{
+            file: {
+              attributes: {
+                crossOrigin: 'anonymous'
+              }
+            }
           }}
         />
         
