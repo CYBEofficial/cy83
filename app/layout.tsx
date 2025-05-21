@@ -9,13 +9,12 @@ export const metadata: Metadata = {
   title: 'StrogoPovjerljivo',
   description: 'Video player application',
   metadataBase: new URL(isProd ? 'https://jmefdev.github.io' : 'http://localhost:3000'),
-  manifest: `${basePath}/site.webmanifest`,
+  manifest: `${basePath}/manifest.webmanifest`,
   icons: {
     icon: `${basePath}/favicon.ico`,
     shortcut: `${basePath}/favicon.ico`,
     apple: `${basePath}/media/cybe-logo.svg`,
   },
-  themeColor: '#000000',
   openGraph: {
     title: 'StrogoPovjerljivo',
     description: 'Video player application',
@@ -34,12 +33,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <head>
-        <link rel="manifest" href={`${basePath}/site.webmanifest`} />
+        <link rel="manifest" href={`${basePath}/manifest.webmanifest`} />
         <link rel="shortcut icon" href={`${basePath}/favicon.ico`} />
         <link rel="icon" type="image/x-icon" href={`${basePath}/favicon.ico`} />
         <link rel="icon" type="image/svg+xml" href={`${basePath}/media/cybe-logo.svg`} />
         <link rel="apple-touch-icon" href={`${basePath}/media/cybe-logo.svg`} />
-        <meta name="theme-color" content="#000000" />
       </head>
       <body>{children}</body>
     </html>
