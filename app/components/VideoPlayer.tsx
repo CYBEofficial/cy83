@@ -5,10 +5,12 @@ import ReactPlayer from 'react-player';
 
 interface VideoPlayerProps {
   videoUrl: string;
+  isMuted: boolean;
+  setIsMuted: (muted: boolean) => void;
 }
 
-export default function VideoPlayer({ videoUrl }: VideoPlayerProps) {
-  const [isMuted, setIsMuted] = useState(true);
+export default function VideoPlayer({ videoUrl, isMuted, setIsMuted }: VideoPlayerProps) {
+  // isMuted and setIsMuted now come from props
   const [isMounted, setIsMounted] = useState(false);
   const playerContainerRef = useRef<HTMLDivElement>(null);
 
@@ -50,7 +52,6 @@ export default function VideoPlayer({ videoUrl }: VideoPlayerProps) {
 
   return (
     <div className="relative w-full h-full">
-      {/* Video container with click handler */}
       <div className="w-full h-full overflow-hidden rounded-none relative" ref={playerContainerRef}>
         <ReactPlayer
           url={fullVideoUrl}
