@@ -1,0 +1,426 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CRT Glitch Effect */
+@keyframes crt-flicker {
+  0%, 100% { 
+    opacity: 0.95;
+    filter: brightness(1.2) contrast(1.1);
+  }
+  2%, 60% { 
+    opacity: 0.85;
+    filter: brightness(1.1) contrast(1.2);
+  }
+  4%, 40% { 
+    opacity: 1;
+    filter: brightness(1.3) contrast(1.1);
+  }
+  45% { 
+    opacity: 0.8;
+    filter: brightness(1.1) contrast(1.3);
+  }
+  47% { 
+    opacity: 0.95;
+    filter: brightness(1.2) contrast(1.2);
+  }
+  62% { 
+    opacity: 0.9;
+    filter: brightness(1.15) contrast(1.15);
+  }
+  65%, 99% { 
+    opacity: 0.95;
+    filter: brightness(1.2) contrast(1.1);
+  }
+}
+
+@keyframes glitch {
+  0% {
+    text-shadow: 
+      0.05em 0 0 rgba(255, 0, 0, 0.9),
+      -0.05em -0.025em 0 rgba(0, 255, 0, 0.9),
+      -0.025em 0.05em 0 rgba(0, 0, 255, 0.9);
+    transform: translate(0);
+    clip-path: inset(0 0 0 0);
+  }
+  1% {
+    text-shadow: 
+      0.1em 0 0 rgba(255, 0, 0, 0.8),
+      -0.1em -0.05em 0 rgba(0, 255, 0, 0.8),
+      -0.05em 0.1em 0 rgba(0, 0, 255, 0.8);
+    transform: translate(-0.05em, 0.025em);
+    clip-path: inset(10% 0 25% 0);
+  }
+  2%, 3% {
+    text-shadow: 
+      -0.1em 0 0 rgba(255, 0, 0, 0.9),
+      0.1em 0.05em 0 rgba(0, 255, 0, 0.9),
+      0.05em -0.1em 0 rgba(0, 0, 255, 0.9);
+    transform: translate(0.1em, -0.025em);
+    clip-path: inset(20% 0 5% 0);
+  }
+  4% {
+    text-shadow: 
+      0.05em 0 0 rgba(255, 0, 0, 0.9),
+      -0.05em -0.025em 0 rgba(0, 255, 0, 0.9),
+      -0.025em 0.05em 0 rgba(0, 0, 255, 0.9);
+    transform: translate(0);
+    clip-path: inset(0 0 0 0);
+  }
+  20%, 21%, 50%, 51%, 80%, 81% {
+    text-shadow: none;
+    transform: none;
+    clip-path: none;
+  }
+}
+
+.glitch-effect {
+  position: relative;
+  animation: crt-flicker 4s infinite;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  text-shadow: 0 0 1px #fff, 0 0 2px #0ff, 0 0 4px #0ff;
+  overflow: hidden;
+  /* Screen curvature effect */
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.9), 
+              inset 0 0 150px rgba(0, 0, 0, 0.5);
+  border-radius: 2px;
+  /* Screen glass reflection */
+  background: 
+    linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 30%),
+    linear-gradient(225deg, rgba(255,255,255,0.05) 0%, transparent 30%);
+}
+
+/* Broken CRT Static */
+.glitch-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* Screen burn-in effect */
+  background: 
+    radial-gradient(ellipse at 30% 30%, rgba(0,0,0,0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 70%, rgba(0,0,0,0.1) 0%, transparent 50%),
+    /* Dead/stuck pixels */
+    radial-gradient(circle at 10% 20%, rgba(255,0,0,0.8) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 90% 80%, rgba(0,255,0,0.8) 0.5px, transparent 0.5px),
+    radial-gradient(circle at 50% 50%, rgba(0,0,255,0.8) 0.5px, transparent 0.5px),
+    /* Horizontal retrace lines */
+    repeating-linear-gradient(
+      0deg,
+      transparent 0%,
+      transparent 1px,
+      rgba(255,255,255,0.03) 1px,
+      rgba(255,255,255,0.03) 2px,
+      transparent 2px,
+      transparent 5px
+    );
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  animation: burn-in 20s linear infinite;
+}
+
+.glitch-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    /* Random noise pattern */
+    linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(255,255,255,0.1) 1px, transparent 1px),
+    /* RGB color noise */
+    linear-gradient(90deg, rgba(255,0,0,0.03) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(0,255,0,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,255,0.03) 1px, transparent 1px),
+    /* Interference lines */
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 1px,
+      rgba(255,255,255,0.05) 1px,
+      rgba(255,255,255,0.05) 2px
+    );
+  background-size: 10px 10px, 10px 10px, 20px 20px, 20px 20px, 30px 30px, 100% 5px;
+  opacity: 0.5;
+  z-index: 2;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  animation: 
+    grain 4s steps(10) infinite,
+    color-shift 3s linear infinite,
+    flicker 0.1s steps(2, jump-none) infinite,
+    horizontal-wave 15s linear infinite;
+}
+
+@keyframes burn-in {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 0.9; }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-1%, -1%) skew(0.5deg, 0.5deg); }
+  20% { transform: translate(-2%, 2%) skew(-0.5deg, 0.5deg); }
+  30% { transform: translate(1%, -2%) skew(0.3deg, -0.3deg); }
+  40% { transform: translate(-1%, 3%) skew(-0.7deg, 0.2deg); }
+  50% { transform: translate(-3%, 1%) skew(0.2deg, -0.2deg); }
+  60% { transform: translate(2%, 2%) skew(-0.3deg, 0.4deg); }
+  70% { transform: translate(1%, -1%) skew(0.4deg, -0.1deg); }
+  80% { transform: translate(-2%, 1%) skew(-0.2deg, 0.3deg); }
+  90% { transform: translate(2%, -2%) skew(0.5deg, -0.2deg); }
+}
+
+@keyframes color-shift {
+  0%, 100% { 
+    filter: hue-rotate(0deg) contrast(1.2);
+  }
+  25% { 
+    filter: hue-rotate(5deg) contrast(1.3);
+  }
+  50% { 
+    filter: hue-rotate(-5deg) contrast(1.4);
+  }
+  75% { 
+    filter: hue-rotate(3deg) contrast(1.3);
+  }
+}
+
+.glitch-effect:hover {
+  animation: crt-flicker 2s infinite, glitch 0.5s infinite;
+  text-shadow: 0 0 2px #fff, 0 0 4px #0ff, 0 0 6px #0ff, 0 0 8px #0ff;
+}
+
+.glitch-effect:hover::before {
+  opacity: 0.9;
+  animation: 
+    burn-in 10s linear infinite,
+    flicker 0.05s steps(2, jump-none) infinite;
+}
+
+.glitch-effect:hover::after {
+  opacity: 0.7;
+  animation: 
+    grain 2s steps(10) infinite,
+    color-shift 1.5s linear infinite,
+    flicker 0.05s steps(2, jump-none) infinite,
+    intensify 0.3s infinite,
+    horizontal-wave 5s linear infinite;
+  background-size: 5px 5px, 5px 5px, 10px 10px, 10px 10px, 15px 15px, 100% 3px;
+  filter: contrast(1.5) brightness(1.2);
+}
+
+@keyframes intensify {
+  0%, 100% { filter: brightness(1.2) contrast(1.3); }
+  50% { filter: brightness(1.3) contrast(1.4); }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 0.2; }
+  10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90% { opacity: 0.4; }
+  5%, 15%, 25%, 35%, 45%, 55%, 65%, 75%, 85%, 95% { opacity: 0.1; }
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
+}
+
+.glitch-effect::before,
+.glitch-effect::after {
+  content: '';
+  position: absolute;
+  top: -100%;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  background: 
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(255, 0, 0, 0.1) 0.5%,
+      transparent 1%
+    );
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  opacity: 0.4;
+  z-index: 1;
+}
+
+.glitch-effect::after {
+  background: 
+    repeating-linear-gradient(
+      45deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.2) 0.5%,
+      transparent 1%
+    );
+  mix-blend-mode: multiply;
+  opacity: 0.3;
+}
+
+/* CRT Scanlines */
+.crt-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    /* Scanlines */
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(255, 255, 255, 0.03) 0.5%,
+      transparent 0.7%
+    ),
+    /* RGB color fringing */
+    linear-gradient(
+      to right,
+      rgba(255, 0, 0, 0.03) 0%,
+      rgba(0, 255, 0, 0.03) 50%,
+      rgba(0, 0, 255, 0.03) 100%
+    ),
+    /* Vignette */
+    radial-gradient(
+      circle at 50% 50%,
+      transparent 60%,
+      rgba(0, 0, 0, 0.9) 100%
+    ),
+    /* Screen curvature distortion */
+    radial-gradient(
+      ellipse at 50% 50%,
+      transparent 0%,
+      transparent 70%,
+      rgba(0, 0, 0, 0.1) 100%
+    );
+  background-blend-mode: overlay, screen, normal, normal;
+  pointer-events: none;
+  z-index: 3;
+  animation: 
+    scan 8s linear infinite,
+    color-pulse 10s ease-in-out infinite,
+    distortion 15s linear infinite;
+  opacity: 0.9;
+  mix-blend-mode: overlay;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+@keyframes distortion {
+  0%, 100% {
+    transform: scale(1);
+    border-radius: 2px;
+  }
+  25% {
+    transform: scale(1.001) skew(0.2deg, 0.1deg);
+    border-radius: 3px;
+  }
+  50% {
+    transform: scale(0.999) skew(-0.1deg, 0.2deg);
+    border-radius: 1px;
+  }
+  75% {
+    transform: scale(1.001) skew(0.1deg, -0.1deg);
+    border-radius: 2.5px;
+  }
+}
+
+@keyframes color-pulse {
+  0%, 100% { 
+    filter: hue-rotate(0deg);
+    opacity: 0.7;
+  }
+  33% { 
+    filter: hue-rotate(5deg);
+    opacity: 0.8;
+  }
+  66% { 
+    filter: hue-rotate(-5deg);
+    opacity: 0.6;
+  }
+}
+
+@keyframes horizontal-wave {
+  0%, 100% { 
+    transform: translateX(0) skew(0deg);
+    opacity: 0.7;
+  }
+  25% { 
+    transform: translateX(1px) skew(0.2deg);
+    opacity: 0.8;
+  }
+  50% { 
+    transform: translateX(-1px) skew(-0.2deg);
+    opacity: 0.9;
+  }
+  75% { 
+    transform: translateX(0.5px) skew(0.1deg);
+    opacity: 0.8;
+  }
+}
+
+.crt-scanline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 255, 255, 0.05) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  pointer-events: none;
+  animation: scan 8s linear infinite reverse;
+}
+
+@keyframes scan {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+/* Random Glitch Effect */
+@keyframes random-glitch {
+  0% {
+    transform: translate(0);
+    clip-path: inset(0 0 0 0);
+  }
+  2% {
+    transform: translate(-2px, 1px);
+    clip-path: inset(5% 0 10% 0);
+  }
+  4%, 6% {
+    transform: translate(3px, -1px);
+    clip-path: inset(10% 0 5% 0);
+  }
+  8% {
+    transform: translate(0);
+    clip-path: inset(0 0 0 0);
+  }
+  25%, 75% {
+    transform: translate(0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.glitch-effect:hover {
+  animation: none;
+}
+
+.glitch-effect:hover::before,
+.glitch-effect:hover::after {
+  animation: random-glitch 0.5s infinite;
+}
