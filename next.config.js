@@ -5,19 +5,16 @@ const nextConfig = {
   reactStrictMode: true,
   output: 'export',
   distDir: 'docs',
-  // Image optimization configuration for static export
+  // Disable image optimization for static export
   images: {
     unoptimized: true,
-    loader: 'custom',
-    loaderFile: './image-loader.js',
   },
   // For custom domain, we don't need basePath or assetPrefix
-  // as we want to serve from the root of the domain
   basePath: '',
   assetPrefix: '',
-  // Optional: Add trailing slash for better compatibility
+  // Add trailing slash for better compatibility
   trailingSlash: true,
-  // Optional: Add environment variables for the domain
+  // Environment variables
   env: {
     NEXT_PUBLIC_BASE_URL: 'https://cybe.in',
   },
